@@ -1,0 +1,37 @@
+.btn{
+  &.btn-primary{
+    background-color: #3498db;
+    border-color: #3498db;
+  }
+  &.btn-success{
+    background-color: #81b53e;
+    border-color: #81b53e;
+  }
+  &.btn-warning{
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+  }
+  &.btn-inverse{
+    background-color: #3a444e;
+    border-color: #3a444e;
+  }
+  &.btn-danger{
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+  }
+}
+
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}

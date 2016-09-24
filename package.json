@@ -1,0 +1,30 @@
+{
+  "name": "Ling",
+  "version": "0.1.0",
+  "description": "REST Client built with Electron",
+  "repository": "https://github.com/talhasch/ling",
+  "scripts": {
+    "postinstall": "install-app-deps"
+  },
+  "dependencies": {
+    "electron-builder": "5.13.1",
+    "electron-packager-tf": "7.5.3",
+    "electron-prebuilt": "1.3.0",
+    "gulp": "^3.9.1",
+    "mocha": "^2.5.3",
+    "spectron": "^3.2.6",
+    "webpack-stream": "^3.2.0"
+  },
+  "build": {
+    "win": {
+      "icon": "resources/icon.ico"
+    },
+    "osx": {
+      "icon": "resources/icon.icns",
+      "target": "dmg"
+    }
+  },
+  "devDependencies": {
+    "gulp-json-editor": "^2.2.1"
+  }
+}

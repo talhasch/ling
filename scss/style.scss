@@ -1,0 +1,47 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700&subset=latin,latin-ext);
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+  
+// Core variables and mixins
+@import "imports/variables";
+@import "imports/mixins";
+
+// Core layouts
+@import "imports/layout";
+@import "imports/utilities";
+
+@import "imports/bootstrap-override.scss";
+
+body{
+  visibility: hidden;
+}
+
+.scope-header{
+  position: absolute;
+  left:0;
+  top:0;
+  right:0;
+  background: #fff;
+  color: #6e7882;
+  box-sizing: border-box;
+  height: 45px;
+  padding: 10px 0 0 15px;
+  font-size: 20px;
+
+  &>.fa{
+    margin-right: 10px;
+  }
+
+  .buttons{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+  }
+}
+
+@import "imports/request.scss";
+@import "imports/response.scss";
+@import "imports/history.scss";

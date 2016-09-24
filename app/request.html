@@ -1,0 +1,191 @@
+<div ng-controller="RequestCtrl" class="request-container">
+    <div class="scope-header">
+        <i class="fa fa-paper-plane-o" aria-hidden="true"></i> REQUEST
+        <div class="buttons">
+            <button type="button" class="btn btn-link btn-sm" ng-click="clear()" title="Clear all"><i class="fa fa-2x fa-eraser" aria-hidden="true"></i></button>
+        </div>
+    </div>
+    <div class="row row1">
+        <div class="col-sm-12">
+            <form name="runForm" ng-submit="run(runForm.$valid)" novalidate>
+                <div class="input-group input-group-lg">
+                    <input type="url" class="form-control" placeholder="http://" required ng-model="url">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit"> Send</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row row2">
+        <div class="col-sm-4">
+            <select class="form-control input-lg" ng-model="selectedMethod" ng-options="x for x in methods"></select>
+        </div>
+        <div class="col-sm-8" ng-show="contentTypeSelectionShouldVisible()">
+            <select class="form-control input-lg" ng-model="headers['Content-Type']" ng-options="x for x in contentTypes" ng-change="contentTypeSelectionChanged()">
+                <option value="" selected>Content Type: None</option>
+            </select>
+        </div>
+    </div>
+    <div class="row row3">
+        <div class="col col-sm-12">
+            <div class="tabs">
+                <div class="btn-group btn-group-justified">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default btn-lg" ng-class="selectedTab=='headers'?'active':''" ng-click="selectTab('headers')">Headers <span class="label" ng-class="(headers | objLength)?'active':''">{{ (headers | objLength) }}</span></button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default btn-lg" ng-class="selectedTab=='payload'?'active':''" ng-click="selectTab('payload')">Payload</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default btn-lg" ng-class="selectedTab=='params'?'active':''" ng-click="selectTab('params')">Data form <span class="label" ng-class="params.length && paramsFormShouldEnable()?'active':''">{{ params.length }}</span></button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default btn-lg" ng-class="selectedTab=='files'?'active':''" ng-click="selectTab('files')">Files <span class="label" ng-class="files.length?'active':''">{{ files.length }}</span></button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default btn-lg" ng-class="selectedTab=='auth'?'active':''" ng-click="selectTab('auth')">Auth <span class="label" ng-class="authUser || authPass?'active':''"><i class="fa fa-check"></i></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content tab-content-headers" ng-show="selectedTab=='headers'">
+                <table class="table">
+                    <tbody>
+                        <tr ng-show="(headers | objLength)==0">
+                            <td>Empty</td>
+                        </tr>
+                        <tr ng-repeat="(name, value) in headers">
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm-5"><input readonly type="text" class="form-control input-sm" value="{{ name }}"></div>
+                                    <div class="col-sm-5 col-no-left-pad"><input readonly type="text" class="form-control input-sm" value="{{ value }}"></div>
+                                    <div class="col-sm-1 col-no-left-pad"><button class="btn btn-sm btn-default" ng-click="editHeader(name, value)"><i class="fa fa-pencil"></i></button></div>
+                                    <div class="col-sm-1 col-no-left-pad"><button class="btn btn-sm btn-default" ng-click="removeHeader(name)"><i class="fa fa-remove"></i></button></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <form name="headersForm" ng-submit="submitHeadersForm(headersForm.$valid)" novalidate>
+                                    <div class="row">
+                                        <div class="col-sm-5"><input class="form-control input-sm" placeholder="Name" ng-model="newHeaderName"
+                                                ng-required="true"></div>
+                                        <div class="col-sm-5 col-no-left-pad"><input class="form-control input-sm" placeholder="Value" ng-model="newHeaderValue"
+                                                ng-required="true"></div>
+                                        <div class="col-sm-2 col-no-left-pad"><button type="submit" class="btn btn-sm btn-success btn-block"><i class="fa fa-plus"></i></button></div>
+                                    </div>
+                                    <div class="alert alert-danger" ng-show="headersForm.$submitted && headersForm.$error.required">Name and value fields required.</div>
+                                </form>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="tab-content tab-content-data" ng-show="selectedTab=='payload'">
+                    <div class="text-center" ng-show="!payloadFormShouldEnable()">
+                    <button type="button" class="btn btn-default" ng-click="switchMethodForPayload()">Switch method to POST</button>
+                    </div>
+                    <textarea class="form-control" ng-model="payload" ng-show="payloadFormShouldEnable()"></textarea>
+            </div>
+            <div class="tab-content tab-content-data" ng-show="selectedTab=='params'">
+                <div class="text-center" ng-show="!paramsFormShouldEnable()">
+                    <button type="button" class="btn btn-default" ng-click="switchContentTypeForParamsForm()">Switch content-type to 'application/x-www-form-urlencoded'</button>
+                </div>
+                <table class="table" ng-show="paramsFormShouldEnable()">
+                    <tbody>
+                        <tr ng-show="!params.length">
+                            <td>Empty</td>
+                        </tr>
+                        <tr ng-repeat="param in params">
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm-5"><input readonly type="text" class="form-control input-sm" ng-model="param.name" value="{{ param.name }}"></div>
+                                    <div class="col-sm-5"><input readonly type="text" class="form-control input-sm" ng-model="param.value" value="{{ param.value }}"></div>
+                                    <div class="col-sm-1"><button class="btn btn-sm btn-default" ng-click="editParam(param)"><i class="fa fa-pencil"></i></button></div>
+                                    <div class="col-sm-1"><button class="btn btn-sm btn-default" ng-click="removeParam(param)"><i class="fa fa-remove"></i></button></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <form name="paramsForm" ng-submit="submitParamsForm(paramsForm.$valid)" novalidate>
+                                    <div class="row">
+                                        <div class="col-sm-5"><input class="form-control input-sm" placeholder="Name" ng-model="newParamName" ng-required="true"></div>
+                                        <div class="col-sm-5"><input class="form-control input-sm" placeholder="Value" ng-model="newParamValue"
+                                                ng-required="true"></div>
+                                        <div class="col-sm-2"><button type="submit" class="btn btn-sm btn-success btn-block"><i class="fa fa-plus"></i></button></div>
+                                    </div>
+                                    <div class="alert alert-danger" ng-show="paramsForm.$submitted && paramsForm.$error.required">Name and value fields required.</div>
+                                </form>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="tab-content tab-content-files" ng-show="selectedTab=='files'">
+                <div class="text-center" ng-show="!filesFormShouldEnable()">
+                    <button type="button" class="btn btn-default" ng-click="switchContentTypeForFilesForm()">Switch Content-Type to 'multipart/form-data'</button>
+                </div>
+
+                <table class="table" ng-show="filesFormShouldEnable()">
+                    <tbody>
+                        <tr ng-show="!files.length">
+                            <td>Empty</td>
+                        </tr>
+                        <tr ng-repeat="file in files">
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm-5"><input readonly type="text" class="form-control input-sm" value="{{ file.name }}"></div>
+                                    <div class="col-sm-5"><input readonly type="text" class="form-control input-sm" value="{{ file.label }}"></div>
+                                    <div class="col-sm-2"><button class="btn btn-sm btn-default" ng-click="removeFile(file)"><i class="fa fa-remove"></i></button></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <form name="filesForm" ng-submit="submitFilesForm()" novalidate>
+                                    <div class="row">
+                                        <div class="col-sm-5"><input type="text" class="form-control input-sm" placeholder="Name" ng-model="newFileName"></div>
+                                        <div class="col-sm-5"><input type="file" class="form-control input-sm" file-model="newFileValue"></div>
+                                        <div class="col-sm-2"><button type="submit" class="btn btn-sm btn-success btn-block"><i class="fa fa-plus"></i></button></div>
+                                    </div>
+                                    <div class="alert alert-danger" ng-show="filesForm.$submitted && filesForm.$error.required">Name and file fields required.</div>
+                                </form>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+            <div class="tab-content tab-content-auth" ng-show="selectedTab=='auth'">
+                <div class="form-group">
+                    <input type="text" class="form-control input-sm" placeholder="Username" ng-model="authUser">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control input-sm" placeholder="Password" ng-model="authPass">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div modal-show modal-visible="showProgressDialog" class="modal fade" data-backdrop="static">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Please Wait</h4>
+                </div>
+                <div class="modal-body">
+                    <p><i class="fa fa-spinner fa-pulse fa-fw"></i> Sending the request...</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelRequest()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

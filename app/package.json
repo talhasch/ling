@@ -1,0 +1,19 @@
+{
+  "name": "Ling",
+  "version": "0.1.0",
+  "description": "REST Client built with Electron",
+  "author": {
+    "name": "Talha Buğra Bulut",
+    "email": "talhabugrabulut@gmail.com"
+  },
+  "license": "MIT",
+  "main": "main.js",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.6.3",
+    "highlightjs": "^8.7.0",
+    "jquery": "^3.1.0",
+    "nedb": "^1.8.0"
+  }
+}

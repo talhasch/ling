@@ -1,0 +1,38 @@
+.history{
+    position: absolute;
+    right:0;
+    bottom:0;
+    width: 50%;
+    height: 30%;
+    padding: 55px 10px 10px 10px;
+    box-sizing: border-box;
+
+    .history-container{
+        height:100%; 
+        
+        .history-table{
+           height:100%; 
+           overflow: auto;
+
+           table{
+               tr{
+                .apply{
+                    visibility: hidden;
+                    cursor: pointer;
+                }
+                th, td{
+                    padding: 3px;
+                    font-size: 12px;    
+                }
+               }
+
+               tr:hover{
+                .apply{
+                    visibility: visible;
+                }
+               }
+           }
+        }
+
+    }
+}
