@@ -15,8 +15,8 @@ $ npm install -g bozon
 ## Clone
 
 ```
-git clone https://github.com/talhasch/ling
-cd ling
+$ git clone https://github.com/talhasch/ling
+$ cd ling
 ```
 
 ## Install dependencies
