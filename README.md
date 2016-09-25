@@ -1,9 +1,14 @@
 # Ling
 
-> REST Client built with Electron.
+> REST Client built with [Electron](https://github.com/electron/electron), using [Bozon](https://github.com/railsware/bozon)
 
+## Install bozon
 
-## Dev
+```
+$ npm install -g bozon
+```
+
+## Install dependencies
 
 ```
 $ npm install
@@ -20,8 +25,6 @@ $ bozon start
 ```
 $ bozon package
 ```
-
-Builds the app for OS X, Linux, and Windows, using [electron-builder](https://github.com/electron-userland/electron-builder).
 
 
 ## License
