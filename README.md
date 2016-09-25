@@ -34,7 +34,9 @@ $ bozon package [osx|windows|linux]
 
 <a href="https://raw.githubusercontent.com/talhasch/ling/master/screenshot.png" target="_blank"><img src="https://raw.githubusercontent.com/talhasch/ling/master/screenshot.png" width="100%"></a>
 
+### Ling?
 
+[Ling](https://en.wikipedia.org/wiki/Ling_Ling_(giant_panda))
 
 ## License
 
