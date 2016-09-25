@@ -1,6 +1,7 @@
 # Ling
 
-> REST Client built with [Electron](https://github.com/electron/electron), using [Bozon](https://github.com/railsware/bozon)
+> REST Client built with [Electron](https://github.com/electron/electron) and AngularJS. [Bozon](https://github.com/railsware/bozon) used for scaffolding, building and packaging.
+
 
 ## Install bozon
 
@@ -23,7 +24,7 @@ $ bozon start
 ### Package
 
 ```
-$ bozon package
+$ bozon package [osx|windows|linux]
 ```
 
 
