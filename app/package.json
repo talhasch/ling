@@ -1,7 +1,7 @@
 {
   "name": "Ling",
   "version": "0.1.0",
-  "description": "REST Client built with Electron",
+  "description": "REST client",
   "author": {
     "name": "Talha Buğra Bulut",
     "email": "talhabugrabulut@gmail.com"

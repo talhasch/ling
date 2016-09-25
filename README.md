@@ -3,7 +3,7 @@
 <img src="https://raw.githubusercontent.com/talhasch/ling/master/ling.png" width="140">
 
 
-> REST Client built with [Electron](https://github.com/electron/electron) and AngularJS. [Bozon](https://github.com/railsware/bozon) used for scaffolding, building and packaging.
+> REST client built with [Electron](https://github.com/electron/electron) and AngularJS. [Bozon](https://github.com/railsware/bozon) used for scaffolding, building and packaging.
 
 
 ## Install bozon
@@ -11,6 +11,11 @@
 ```
 $ npm install -g bozon
 ```
+
+## Clone
+
+git clone https://github.com/talhasch/ling
+cd ling
 
 ## Install dependencies
 
