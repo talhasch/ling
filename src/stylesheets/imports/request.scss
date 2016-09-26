@@ -1,0 +1,159 @@
+
+.request{
+    position: absolute;
+    left:0;
+    top:0;
+    width: 50%;
+    height: 100%;
+    padding: 55px 10px 10px 10px;
+    box-sizing: border-box;
+    background-color: #ecf0f5;
+    border-right: 3px solid #d2d6de;
+
+     .request-container{
+        height:100%; 
+
+        /*
+        row1 = url, run button
+        row2 = method, content type
+        row3 = tabs and tab contents (headers, raw payload, data, files, auth)
+        */
+
+        .row1, .row2{
+            margin-bottom: 20px;
+        }
+
+        .row1{
+            form{
+                &.ng-submitted{
+                    input{
+                        &.ng-invalid{
+                            border-color: red;
+                        }
+                    }
+                }
+            }
+        }
+
+        .row3{
+            /* 130px = .row1's height + .row2's height (approximate) */
+            height: calc(100% - 132px); 
+
+            .col{
+                height: 100%;
+            }
+        }
+
+        .tabs, .tab-content{
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tabs{
+            height:41px;
+            
+            .btn {
+                background-color: #2c3b41;
+                color:#fdfdfd;
+                border-width: 0; 
+                border-radius: 0;
+                color:#839ca8;
+                font-size:14px;
+                border-bottom: 3px solid #1e282c;
+
+                &.active{
+                    border-bottom: 3px solid #3c8dbc;
+                    color:#fff;
+                }
+
+                &:focus{
+                    outline: none;
+                }
+
+                .label{
+                    font-size: 12px;
+                    line-height: 100%;
+                    padding: 1px 2px;
+                    background-color: #2c3b41;
+                    color: #3c8dbc;
+                    visibility: hidden;
+                    margin-left: 2px;
+                    &.active{
+                        visibility: visible;
+                    }
+                }
+
+                &.active{
+                    .label{
+                        background-color: #fff;
+                    }
+                }
+            }
+        }
+
+        .tab-content{
+            /* 38px = .tabs's height (approximate) */
+            height: calc(100% - 41px); 
+            padding: 10px;
+            overflow: auto;
+            background-color: #58656b;
+            
+            textarea{
+                height: 100%;
+                resize: none;
+                background: #f7f7f7;
+                font-size: 16px;
+            }
+
+            .table{ 
+        
+                &> thead{
+                    &> tr{
+                        &> th{
+                            color: #ffffff;
+                            border-color: #374850;
+                        }
+                    }
+                }
+
+                &> tbody{
+                    &> tr{
+                        &> td{
+                                border-top: 1px solid #374850;
+                                color: #839ca8;
+                                word-wrap: break-word;
+                                overflow-wrap: break-word;
+                        }
+                    }
+                }
+
+                &> tfoot{
+                  
+                    &> tr{
+                        &> td{
+                            padding-top: 30px;
+                            border-top: 1px solid #374850;
+                        }
+                    }
+                }
+            }
+
+            form{
+
+                &.ng-submitted{
+                    input{
+                        &.ng-invalid{
+                            border-color: red;
+                        }
+                    }
+                }
+
+                .alert{
+                    padding:5px;
+                    margin: 4px 0;
+                }
+            }
+        }
+     }
+}

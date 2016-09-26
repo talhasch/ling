@@ -1,0 +1,33 @@
+<div ng-controller="HistoryCtrl" class="history-container">
+    <div class="scope-header">
+        <i class="fa fa-history" aria-hidden="true"></i> HISTORY
+        <div class="buttons">
+            <button type="button" class="btn btn-link btn-sm" ng-click="clearHistory()" title="Clear History"><i class="fa fa-ban" aria-hidden="true"></i></button>
+        </div>
+    </div>
+    <div class="history-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width:90px">method</th>
+                    <th>url</th>
+                    <th style="width:90px">duration</th>
+                    <th style="width:90px">status</th>
+                    <th style="width:30px"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-show="!data.length">
+                    <td colspan="5" style="text-align:center">empty</td>
+                </tr>
+                <tr ng-repeat="row in data">
+                    <th>{{ row.method }}</th>
+                    <td>{{ row.url | limitTo: 50 }}{{ row.url.length > 50 ? '...' : '' }}</td>
+                    <td>{{ row.duration }} ms</td>
+                    <td>{{ row.status }}</td>
+                    <td><a class="apply" ng-click="use(row)" title="use"><i class="fa fa-check" aria-hidden="true"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

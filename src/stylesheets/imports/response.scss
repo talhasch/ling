@@ -1,0 +1,101 @@
+.response{
+    position: absolute;
+    right:0;
+    top:0;
+    width: 50%;
+    height: 70%;
+    padding: 55px 10px 10px 10px;
+    box-sizing: border-box;
+    border-bottom: 3px solid #d2d6de;
+
+    .response-container{
+        height:100%; 
+
+        .nav-tabs{
+            li{
+                &.active{
+                    a{
+                        font-weight: 600;
+                        background-color: #ecf0f5;
+                    }
+                }
+            }
+        }
+
+        .tab-content{
+            /* 42px = .nav-tabs's height  */
+            height: calc(100% - 42px);
+            padding: 10px;
+            
+            box-sizing: border-box;
+            background-color: #ecf0f5;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+
+            &.tab-content-headers{
+                .response-headers{
+                    height: 100%;
+                    overflow: auto;
+
+                    .status-text{
+                        font-size: 22px;
+                        margin-bottom: 10px;
+                        color: #333;
+
+                        &.success{
+                            color: green;
+                        }
+
+                        &.client-err{
+                            color: red;
+                        }
+
+                        &.server-err{
+                            color: red;
+                        }
+                    }
+
+                    .response-url{
+                        font-size: 16px;
+                        margin-bottom: 20px;
+                        max-width: 90%;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: block;
+                    }
+
+                    .table{
+                        td{
+                            font-family: monospace
+                        }
+                    }
+                }
+            }
+
+            &.tab-content-body{
+                position: relative;
+                
+                .response-body{
+                    height: 100%;
+
+                    textarea{
+                        height: 100%;
+                        resize: none;
+                        background: #f7f7f7;
+                        font-size: 12px;
+                    }
+
+                    .btn-format{
+                        position: absolute;
+                        right: 10px;
+                        top: 10px;
+                    }
+
+                }
+
+            }
+        }
+    }
+}
