@@ -40,4 +40,4 @@ $ npm run release
 
 ## License
 
-The MIT License (MIT) © Talha Buğra Bulut 2016
+The MIT License (MIT) © Talha Buğra Bulut 2016 
