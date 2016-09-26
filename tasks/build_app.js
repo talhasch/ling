@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-var scss = require('gulp-scss');
+var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 var batch = require('gulp-batch');
 var plumber = require('gulp-plumber');
@@ -20,10 +20,10 @@ gulp.task('bundle', function () {
     ]);
 });
 
-gulp.task('scss', function () {
+gulp.task('sass', function () {
     return gulp.src(srcDir.path('stylesheets/style.scss'))
         .pipe(plumber())
-        .pipe(scss({ style: 'compressed', noCache: true }))
+        .pipe(sass({outputStyle: 'compressed'}))
         .pipe(gulp.dest(destDir.path('stylesheets')));
 });
 
@@ -47,8 +47,8 @@ gulp.task('watch', function () {
     }));
 
     watch('src/**/*.scss', batch(function (events, done) {
-        gulp.start('scss', beepOnError(done));
+        gulp.start('sass', beepOnError(done));
     }));
 });
 
-gulp.task('build', ['bundle', 'scss', 'environment']);
+gulp.task('build', ['bundle', 'sass', 'environment']);

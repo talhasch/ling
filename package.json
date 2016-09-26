@@ -41,7 +41,7 @@
     "gulp": "^3.9.0",
     "gulp-batch": "^1.0.5",
     "gulp-plumber": "^1.1.0",
-    "gulp-scss": "^1.4.0",
+    "gulp-sass": "^2.3.2",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.5",
     "mocha": "^3.0.2",
