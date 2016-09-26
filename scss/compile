@@ -1,3 +1,0 @@
-#!/bin/bash
-
-scss style.scss ../app/css/style.css --no-cache  --sourcemap=none --style=compressed
