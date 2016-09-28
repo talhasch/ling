@@ -59,11 +59,25 @@
         $scope.$on("response", (event, headers, body, statusCode) => {
             $scope.headers = headers;
             $scope.statusCode = statusCode;
-            $scope.isBinary = isBinaryContentType(headers['content-type']);
+            
+            let contentType = headers['content-type'];
+
+            if(contentType!==undefined){
+                $scope.isBinary = isBinaryContentType(headers['content-type']);
+            } else {
+                $scope.isBinary = false;
+            }
+            
             if (!$scope.isBinary) {
                 $scope.body = body;
             }
-            $scope.isJson = isJsonContentType(headers['content-type']);
+
+            if(contentType !== undefined){
+                $scope.isJson = isJsonContentType(headers['content-type']);
+            } else {
+                $scope.isJson = false;
+            }
+            
             $scope.flag = true;
         });
 
